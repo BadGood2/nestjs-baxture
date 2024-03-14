@@ -27,9 +27,9 @@ export class LoadBalancerService implements OnModuleInit {
   }
 
   getPort() {
-    if (cluster.isPrimary) return 4000;
+    if (cluster.isPrimary) return process.env.port || 3000;
     else {
-      return 4000 + (cluster.worker.id % this.numCPUs) + 1;
+      return process.env.port + (cluster.worker.id % this.numCPUs) + 1;
     }
   }
 }
